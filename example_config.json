@@ -1,0 +1,25 @@
+{
+    "server": "http://10.0.0.1",
+    "detect_ip": false,
+    "strict_bind": false,
+    "double_stack": false,
+    "retry_delay": 1000,
+    "retry_times": 3,
+    "n": 200,
+    "type": 1,
+    "acid": 12,
+    "os": "Windows",
+    "name": "Windows 98",
+    "users": [
+        {
+            "username": "username1",
+            "password": "password1",
+            "ip": "10.1.2.3"
+        },
+        {
+            "username": "username2@cmcc",
+            "password": "password2",
+            "if_name": "macvlan1"
+        }
+    ]
+}

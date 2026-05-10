@@ -1,3 +1,68 @@
+# NENU校园网命令行登陆工具
+
+> **许可与来源**：本仓库是 [zu1k/srun](https://github.com/zu1k/srun) 的 fork，主要补充东师（NENU）校园网可用的**配置示例与文档**；程序本体仍属上游项目。若在仓库内保留上游源码或基于其分发二进制，须遵守 [GPL-3.0](./LICENSE) 并保留原作者与许可证文本。合规问题请咨询专业人士。
+
+## Quick start
+
+1. **编译**：编译时需设置 `AUTH_SERVER_IP`（你所在环境的认证服务器地址，示例中的 IP 请改成自己的）。该值会在编译期写入程序，用于在未指定 URL 时作为默认认证地址。
+
+```bash
+AUTH_SERVER_IP=10.100.100.152 cargo build --release
+```
+
+2. **登录**：使用配置文件启动登录（`-c` 指向你的 `config.json`，可与仓库里的模板对照修改）。
+
+```bash
+./target/release/srun login -c config.json
+```
+
+3. **登出**：同上配置文件，退出当前会话。
+
+```bash
+./target/release/srun logout -c config.json
+```
+
+配置文件示例, 只需要改一下用户名和密码就可以。
+
+```json
+{
+    "server": "http://10.100.100.152",
+    "detect_ip": true,
+    "strict_bind": false,
+    "double_stack": false,
+    "retry_delay": 1000,
+    "retry_times": 3,
+    "n": 200,
+    "type": 1,
+    "acid": 4,
+    "os": "Windows",
+    "name": "Windows 98",
+    "users": [
+        {
+            "username": "your username",
+            "password": "your password",
+            "ip": ""
+        }
+    ]
+}
+```
+
+## 掉线自动登录
+
+安装并启动（unit 会直接执行本仓库里的 `auto_login.sh`；默认使用同目录下 `target/release/srun` 与 `config.json`，移动仓库后需重装 unit）
+
+```bash
+sudo bash ./install.sh --systemd --enable
+```
+
+停止并卸载
+
+```bash
+sudo bash ./uninstall.sh --systemd
+```
+
+---
+
 # srun
 
 [![GitHub stars](https://img.shields.io/github/stars/zu1k/srun)](https://github.com/zu1k/srun/stargazers)
@@ -149,4 +214,8 @@ cargo build --features "tls" --release
 
 ## License
 
-**srun** © [zu1k](https://github.com/zu1k), Released under the [GPL-3.0](./LICENSE) License.<br>
+**srun** 原作者 © [zu1k](https://github.com/zu1k)，以 [GPL-3.0](./LICENSE) 发布。若本仓库包含上游程序源码或发布基于该源码构建的程序，整体在分发时适用 GPL-3.0；许可证全文见仓库根目录 `LICENSE`。
+
+---
+
+English (upstream notice): **srun** © [zu1k](https://github.com/zu1k), Released under the [GPL-3.0](./LICENSE) License.<br>

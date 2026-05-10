@@ -1,0 +1,27 @@
+[Unit]
+Description=Srun campus network watchdog (login when offline)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# install.sh rewrites this line to the absolute path of auto_login.sh in your clone.
+ExecStart=/usr/local/sbin/placeholder-replaced-by-install.sh
+
+# SRUN_BIN / SRUN_CONFIG default to this repo (SCRIPT_DIR/target/release/srun,
+# SCRIPT_DIR/config.json). Uncomment to override:
+# Environment=SRUN_BIN=/custom/srun
+# Environment=SRUN_CONFIG=/etc/srun/config.json
+
+# Connectivity uses CONNECTIVITY_URL_1 / CONNECTIVITY_URL_2 (HTTP 204 = online).
+# Uncomment to override defaults (Google / Huawei generate_204):
+# Environment=CONNECTIVITY_URL_1=http://connectivitycheck.gstatic.com/generate_204
+# Environment=CONNECTIVITY_URL_2=http://connectivitycheck.platform.hicloud.com/generate_204
+Environment=OK_INTERVAL=120
+Environment=RETRY_INTERVAL=30
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
