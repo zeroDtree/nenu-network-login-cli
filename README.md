@@ -61,6 +61,12 @@ sudo bash ./install.sh --systemd --enable
 sudo bash ./uninstall.sh --systemd
 ```
 
+测试网络连通性
+
+```bash
+bash ./test/net_test.sh
+```
+
 ---
 
 # srun
